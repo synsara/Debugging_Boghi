@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include <stdlib.h>
+int row,col;
+void leftToRight(int a[row][col],int givenr,int leftc,int rightc)
+{
+    for(int i=leftc;i<=rightc;i++)
+    {
+        printf("%d ",a[givenr][i]);
+    }
+}
+void topToBottom(int a[row][col],int givenc,int topr,int bottomr)
+{
+    for(int i=topr;i<=bottomr;i++)
+    {
+        printf("%d ",a[i][givenc]);
+    }    
+}
+void rightToLeft(int a[row][col],int givenr,int rightc,int leftc)
+{
+    for(int i=rightc;i>=leftc;i--)
+    {
+        printf("%d ",a[i][givenr]);
+    }
+}
+void bottomToTop(int a[row][col],int givenc,int bottomr,int topr)
+{
+    for(int i=topr;i>=bottomr;i++)
+    {
+        printf("%d ",a[i][givenc]);
+    }
+}
+
+int main()
+{
+    scanf("%d %d",&row,&col);
+    int a[row][col],i,j;
+    for(i=0;i<row;i++)
+    {
+        for(j=0;j<col;j++)
+        {
+            scanf("%d",a[i][j]);
+        }
+    }
+    int startr=0,startc=0,endr=row-1,endc=col-1;
+    while(startr<=endr && startc<=endc)
+    {
+        leftToRight(a,startr,startc,endc);
+        topToBottom(a,endc,startr+1,endr);
+        if(startr!=endr)
+        rightToLeft(a,endr,endc-1,startc);
+        bottomToTop(a,startc,endr-1,startr+1);
+        startr++;
+        startc++;
+        endr--;
+        endc--;
+    }
+}
+
